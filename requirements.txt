@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit-learn
+joblib
+pyyaml
+matplotlib
+# dvc core
+dvc
+# for S3 remote
+dvc[s3]
