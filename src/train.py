@@ -6,6 +6,8 @@ import pandas as pd
 import yaml
 import joblib
 import logging
+import dvclive
+from dvclive import Live
 
 
 root=os.path.dirname(os.path.dirname(__file__))
@@ -81,6 +83,13 @@ def main():
     processed_path=os.path.join(root,params["dataset"]["processed_data"])
     df=load_data(processed_path)
     model,mse,r2=preprocess(df,params)
+    #  Log metrics with DVCLive
+    live = dvclive.Live("reports")  # directory to save logs
+    live.log_metric("mse", mse)
+    live.log_metric("r2", r2)
+    live.log_params(params)
+    live.next_step()
+    
     print("mse is ", mse)
     print("r2 score is ",r2)
     save_model(model,model_path)

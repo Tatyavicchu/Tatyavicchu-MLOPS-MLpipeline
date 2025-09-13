@@ -5,6 +5,7 @@ import joblib
 import logging
 import yaml
 from sklearn.metrics import r2_score,mean_squared_error
+from dvclive import Live
 
 root = os.path.dirname(os.path.dirname(__file__))
 param_path=os.path.join(root,"params.yaml")

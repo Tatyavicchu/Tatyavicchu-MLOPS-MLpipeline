@@ -4,8 +4,8 @@ dataset:
   test: data/test.csv
 
 train: 
-  test_size: 0.4
-  random state: 45
+  test_size: 0.3
+  random state: 40
 
 model:
   linear: models/linear.pkl
