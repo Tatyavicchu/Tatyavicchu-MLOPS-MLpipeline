@@ -1,0 +1,66 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/house.csv
+      hash: md5
+      md5: 01685f7b37cd51b7c12a276704472acd
+      size: 605224
+    - path: params.yaml
+      hash: md5
+      md5: 25ef408d1fafe5168ba713dad9d5418b
+      size: 231
+    - path: src/preprocess.py
+      hash: md5
+      md5: a41355bfa10ffd9ac7be528d84bb6e55
+      size: 2595
+    outs:
+    - path: data/processed_data.csv
+      hash: md5
+      md5: 4ef553332f71d2ff8cbccbf0206531d4
+      size: 611322
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed_data.csv
+      hash: md5
+      md5: 4ef553332f71d2ff8cbccbf0206531d4
+      size: 611322
+    - path: params.yaml
+      hash: md5
+      md5: 25ef408d1fafe5168ba713dad9d5418b
+      size: 231
+    - path: src/train.py
+      hash: md5
+      md5: bb8ef4beadff6ad8535b009393eb4123
+      size: 2932
+    outs:
+    - path: models/linear.pkl
+      hash: md5
+      md5: afb273977e3254d60b012dc18b36ed97
+      size: 969
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/test.csv
+      hash: md5
+      md5: 06fc12db4289335259488b0feb18a103
+      size: 2586
+    - path: models/linear.pkl
+      hash: md5
+      md5: afb273977e3254d60b012dc18b36ed97
+      size: 969
+    - path: params.yaml
+      hash: md5
+      md5: 25ef408d1fafe5168ba713dad9d5418b
+      size: 231
+    - path: src/evaluate.py
+      hash: md5
+      md5: a56e7a15868897449e282681115617fa
+      size: 2786
+    outs:
+    - path: reports/metrics.json
+      hash: md5
+      md5: 98db0aa87fb0d3fc7a193fe1c3821bc0
+      size: 61
